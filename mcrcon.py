@@ -61,7 +61,8 @@ class MCRcon(object):
         self.disconnect()
 
     def connect(self):
-        self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        family = socket.getaddrinfo(self.host, self.port)[0][0]
+        self.socket = socket.socket(family, socket.SOCK_STREAM)
 
         # Enable TLS
         if self.tlsmode > 0:
